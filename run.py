@@ -1,10 +1,11 @@
-# from shop import create_app
-from flask import Flask
+from config import app
 
+from flask import Flask
+from admin.routes import admin_bp as admin_blueprint
 from shop.routes import shop_bp
 
-app = Flask(__name__)
 
+app.register_blueprint(admin_blueprint)
 app.register_blueprint(shop_bp)
 
 if __name__ == '__main__':
