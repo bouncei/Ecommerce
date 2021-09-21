@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="static/css/style.css" />
+
+    
+
+    <title>{{title}}</title>
+    
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <div class="nav-wrapper">
+       <div class="grad-bar"></div>
+       <nav class="navbar">
+         <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c8/Bluestar_%28bus_company%29_logo.svg/1280px-Bluestar_%28bus_company%29_logo.svg.png" alt="Company Logo">
+         <div class="menu-toggle" id="mobile-menu">
+           <span class="bar"></span>
+           <span class="bar"></span>
+           <span class="bar"></span>
+         </div>
+         <ul class="nav no-search">
+           <li class="nav-item"><a href="#">Home</a></li>
+           <li class="nav-item"><a href="#">About</a></li>
+           <li class="nav-item"><a href="#">Work</a></li>
+           <li class="nav-item"><a href="#">Careers</a></li>
+           <li class="nav-item"><a href="#">Contact Us</a></li>
+           <i class="fas fa-search" id="search-icon"></i>
+           <input class="search-input" type="text" placeholder="Search..">
+         </ul>
+       </nav>
+       </div>
+    {% block content %} 
+    
+    {% endblock %}
+
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+      integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+      integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Custom js -->
+    <script src="static/js/main.js"></script>
+
+    <!-- JavaScript DarkMode -->
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script src="static/js/darkmode.js"></script>
+  </body>
+</html>
