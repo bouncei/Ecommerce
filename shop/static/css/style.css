@@ -7,12 +7,12 @@
 
 /* HEADINGS */
 
-h1,
+/* h1,
 p {
   color: #fff;
   text-align: center;
   line-height: 1.4;
-}
+} */
 
 h1 {
   font-size: 2.2rem;
@@ -358,14 +358,27 @@ input {
   border-radius: 25px;
   margin-right: 40%;
   margin-top: 20px;
-  background: #25cff2;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: auto;
+  background-size: 400% 400%;
+  -webkit-animation: gradbar 15s ease infinite;
+  -moz-animation: gradbar 15s ease infinite;
+  animation: gradbar 15s ease infinite;
 }
 
+
 .btn:hover {
-  background: #67dcf3;
+  /* background: #67dcf3; */
+  transform: scale(1.05)
 }
 
 label {
   color: rgb(138, 123, 123);
   font-size: 15px;
+}
+
+
+
+.text-center {
+  text-align: left !important;
 }
