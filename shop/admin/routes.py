@@ -42,7 +42,7 @@ def login():
             session['email'] = form.email.data
             flash(f'Welcome {form.email.data}, your\'e logged in.', 'success')
             
-            return redirect(request.args.get('next') or url_for('admin'))
+            return redirect(request.args.get('next') or url_for('home'))
         
         else:
             flash( 'Wrong password please try again', 'danger')
