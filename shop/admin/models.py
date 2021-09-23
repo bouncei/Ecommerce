@@ -32,4 +32,4 @@ class User(db.Model):
 #     date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 #     pass
 
-
+# db.create_all()

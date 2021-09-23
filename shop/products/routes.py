@@ -2,6 +2,7 @@ from os import name
 from flask import redirect, render_template, url_for, flash, request, session
 from shop import db, app
 from .models import Brand, Category
+# from .forms import Addproducts
 
 
 
@@ -15,7 +16,7 @@ def addbrand():
         
         db.session.add(brand)
         flash(f'The brand {brand_name} has been added to the database', 'success')
-        # db.session.commit()
+        db.session.commit()
         return redirect(url_for('addbrand'))
     return render_template('products/addbrand.html', title='Add Brand', brands='brands')
 
@@ -29,6 +30,12 @@ def addcat():
         
         db.session.add(category)
         flash(f'The brand {category_name} has been added to the database', 'success')
-        # db.session.commit()
+        db.session.commit()
         return redirect(url_for('addcat'))
     return render_template('products/addbrand.html')
+
+
+
+@app.route('/addproducts', methods=['GET', 'POST'])
+def addproducts():
+    return render_template('products/addproducts.html', title='Add Products')
