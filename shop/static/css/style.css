@@ -20,7 +20,7 @@ h1 {
 
 h2 {
   color: #000;
-  font-size: 1.3rem;
+  font-size: 1.9rem;
   text-align: center;
   line-height: 1.4;
   margin-bottom: 10px;
@@ -344,7 +344,7 @@ input {
   }
 }
 
-.form-control {
+.admin {
   /* border: none; */
   padding: 15px 20px;
   border-radius: 25px;

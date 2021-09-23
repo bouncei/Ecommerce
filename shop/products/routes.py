@@ -1,8 +1,10 @@
 from os import name
+# from shop.products.forms import Addproducts
 from flask import redirect, render_template, url_for, flash, request, session
 from shop import db, app
-from .models import Brand, Category
+from .models import Brand, Category, Addproducts
 # from .forms import Addproducts
+from .forms import Addproducts
 
 
 
@@ -38,4 +40,7 @@ def addcat():
 
 @app.route('/addproducts', methods=['GET', 'POST'])
 def addproducts():
-    return render_template('products/addproducts.html', title='Add Products')
+    brands = Brand.query.all()
+    categories = Category.query.all()
+    form = Addproducts(request.form)
+    return render_template('products/addproducts.html', form=form,title='Add Products', brands=brands, categories=categories)

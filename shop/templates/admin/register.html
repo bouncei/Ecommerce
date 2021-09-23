@@ -5,16 +5,16 @@
     {% from "_formhelpers.html" import render_field %}
     <form method="post", enctype="multipart/form-data">
         <div>
-            {{ render_field(form.name ,class="form-control") }}
-            {{ render_field(form.username ,class="form-control") }} 
-            {{ render_field(form.email ,class="form-control") }}
-            {{ render_field(form.password ,class="form-control") }}
-            {{ render_field(form.confirm ,class="form-control") }}
+            {{ render_field(form.name ,class="form-control admin") }}
+            {{ render_field(form.username ,class="form-control admin") }} 
+            {{ render_field(form.email ,class="form-control admin") }}
+            {{ render_field(form.password ,class="form-control admin") }}
+            {{ render_field(form.confirm ,class="form-control admin") }}
             
 
             <input type="file", name="photo">
         </div>
-    <p><input type=submit value="Register" class="btn btn-info form-control"></p>
+    <p><input type=submit value="Register" class="btn btn-info form-control admin"></p>
     </form>
 </div>
 

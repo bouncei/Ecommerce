@@ -1,7 +1,5 @@
-from flask_wtf.file import FileAllowed, FileField, FileRequired
-from wtforms import Form, validators, IntegerField, StringField
-from wtforms.fields.simple import TextAreaField 
-
+from wtforms import Form, SubmitField,IntegerField,FloatField,StringField,TextAreaField, validators
+from flask_wtf.file import FileField,FileRequired,FileAllowed
 
 class Addproducts(Form):
     name = StringField("Name", [validators.DataRequired()])
@@ -13,6 +11,6 @@ class Addproducts(Form):
 
 
 
-    image_1 = FileRequired("Image_1", validators=[FileRequired(), FileAllowed(['jpg', 'png', 'gif', 'jpeg']), 'image only please'])
-    image_2 = FileRequired("Image_2", validators=[FileRequired(), FileAllowed(['jpg', 'png', 'gif', 'jpeg']), 'image only please'])
-    image_3 = FileRequired("Image_3", validators=[FileRequired(), FileAllowed(['jpg', 'png', 'gif', 'jpeg']), 'image only please'])
+    image_1 = FileField("Image_1", validators=[FileRequired(), FileAllowed(['jpg', 'png', 'gif', 'jpeg'])])
+    image_2 = FileField("Image_2", validators=[FileRequired(), FileAllowed(['jpg', 'png', 'gif', 'jpeg'])])
+    image_3 = FileField("Image_3", validators=[FileRequired(), FileAllowed(['jpg', 'png', 'gif', 'jpeg'])])
