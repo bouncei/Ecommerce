@@ -1,22 +1,25 @@
 # from itertools import product
+from itertools import product
 from .forms import RegistrationForm, LoginForm
 from flask import render_template, session, request, url_for, flash, redirect
 from shop import app, db, bcrypt
 from .models import User
+from shop.products.models import Addproduct
 
 @app.route('/')
 def home():
     return render_template('admin/index.html', title='Home Page')
 
 
-# @app.route('/admin')
-# def admin():
-#     if 'email' not in session:
-#         flash('Please Login First', 'danger')
-#         return redirect(url_for('login'))
+@app.route('/admin')
+def admin():
+    if 'email' not in session:
+        flash('Please Login First', 'danger')
+        return redirect(url_for('login'))
     
-#     products = Addproduct.query.all()
-#     return render_template('admin/index.html', title='Admin Page')
+    products = Addproduct.query.all()
+    print(products)
+    return render_template('admin/index.html', title='Admin Page')
 
 
 @app.route('/register', methods=['GET', 'POST'])

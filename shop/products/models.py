@@ -1,12 +1,10 @@
-from os import name
 
-from flask.scaffold import F
 from shop import db
 from datetime import datetime
 
 
 
-class Addproducts(db.Model):
+class Addproduct(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     price = db.Column(db.Numeric(10,2), nullable=False)
