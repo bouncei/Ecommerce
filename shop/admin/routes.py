@@ -6,20 +6,20 @@ from shop import app, db, bcrypt
 from .models import User
 from shop.products.models import Addproduct
 
+# @app.route('/')
+# def home():
+#     return render_template('admin/index.html', title='Home Page')
+
+
 @app.route('/')
-def home():
-    return render_template('admin/index.html', title='Home Page')
-
-
-@app.route('/admin')
 def admin():
     if 'email' not in session:
-        flash('Please Login First', 'danger')
+        flash('Please login first!', 'danger')
         return redirect(url_for('login'))
     
     products = Addproduct.query.all()
     print(products)
-    return render_template('admin/index.html', title='Admin Page')
+    return render_template('admin/index.html', title='Admin Page', products=products)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -32,7 +32,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(f'Welcome {form.name.data}, Thanks for registering', 'success')
-        return redirect(url_for('home'))
+        return redirect(url_for('admin'))
     return render_template('admin/register.html', form=form, title="Registration page")
 
 
@@ -45,7 +45,7 @@ def login():
             session['email'] = form.email.data
             flash(f'Welcome {form.email.data}, your\'e logged in.', 'success')
             
-            return redirect(request.args.get('next') or url_for('home'))
+            return redirect(request.args.get('next') or url_for('admin'))
         
         else:
             flash( 'Wrong password please try again', 'danger')

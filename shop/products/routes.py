@@ -63,6 +63,7 @@ def addproducts():
         addpro = Addproduct(name=name, price=price, discount=discount, stock=stock, colors=colors, desc=desc, brand_id=brand, category_id=category, image_1=image_1, image_2=image_2, image_3=image_3)
         db.session.add(addpro)
         flash(f'The product {name} has been addedd to your database', 'success')
+        # db.session.commit()
         return redirect(url_for('admin'))
 
     return render_template('products/addproducts.html', form=form,title='Add Products', brands=brands, categories=categories)
