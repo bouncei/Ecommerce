@@ -6,7 +6,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-8">
       <h2 style="align-content: center" class="bg-info p-2">Add Product</h2>
-      {% from "_formhelpers.html" import render_field %}
+      
       <form action="" , method="POST" , enctype="multipart/form-data">
         {{ render_field(form.name ,class="form-control") }} {{
         render_field(form.price ,class="form-control") }} {{
@@ -17,7 +17,7 @@
         <select name="brand" id="brand" class="form-control">
           <option value="">Select a brand</option>
           {% for brand in brands %}
-          <option value="{{brand.id}}">{{ brand.name }}</option>
+          <option value="{{ brand.id }}">{{ brand.name }}</option>
           {% endfor %}
         </select>
 

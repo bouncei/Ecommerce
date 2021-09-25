@@ -13,6 +13,9 @@ import secrets
 
 @app.route('/addbrand', methods=['GET', 'POST'])
 def addbrand():
+    if 'email' not in session:
+        flash('Please login first!', 'danger')
+        return redirect(url_for('login'))
     if request.method == 'POST':
         brand_name = request.form.get('brand')
         brand = Brand(name=brand_name)
@@ -27,6 +30,9 @@ def addbrand():
 
 @app.route('/addcat', methods=['GET', 'POST'])
 def addcat():
+    if 'email' not in session:
+        flash('Please login first!', 'danger')
+        return redirect(url_for('login'))
     if request.method == 'POST':
         category_name = request.form.get('category')
         category = Category(name=category_name)
@@ -41,6 +47,9 @@ def addcat():
 
 @app.route('/addproducts', methods=['GET', 'POST'])
 def addproducts():
+    if 'email' not in session:
+        flash('Please login first!', 'danger')
+        return redirect(url_for('login'))
     brands = Brand.query.all()
     categories = Category.query.all()
     form = Addproducts(request.form)
@@ -63,7 +72,29 @@ def addproducts():
         addpro = Addproduct(name=name, price=price, discount=discount, stock=stock, colors=colors, desc=desc, brand_id=brand, category_id=category, image_1=image_1, image_2=image_2, image_3=image_3)
         db.session.add(addpro)
         flash(f'The product {name} has been addedd to your database', 'success')
-        # db.session.commit()
+        db.session.commit()
         return redirect(url_for('admin'))
 
     return render_template('products/addproducts.html', form=form,title='Add Products', brands=brands, categories=categories)
+
+
+
+
+@app.route('/edit/<int:id>', methods=["GET", "POST"])
+def edit(id):
+    # form = Addproducts(request.form)
+    # products = Addproduct.query.get_or_404(id)
+
+    if request.method == "POST":
+        return redirect(url_for('admin'))
+
+
+    return render_template('products/editproducts.html',title="Edit Product")
+
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    post = Addproduct.query.get_or_404(id)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect(url_for('admin'))

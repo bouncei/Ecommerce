@@ -18,8 +18,26 @@ def admin():
         return redirect(url_for('login'))
     
     products = Addproduct.query.all()
-    print(products)
+    # print(products)
     return render_template('admin/index.html', title='Admin Page', products=products)
+
+@app.route('/brands')
+def brands():
+    if 'email' not in session:
+        flash('Please login first!', 'danger')
+        return redirect(url_for('login'))
+
+    products = Addproduct.query.all()
+    return render_template('admin/brand.html',title="Brand Page", products=products)
+
+@app.route('/categories')
+def categories():
+    if 'email' not in session:
+        flash('Please login first!', 'danger')
+        return redirect(url_for('login'))
+
+    products = Addproduct.query.all()
+    return render_template('admin/category.html',title="Category Page", products=products)
 
 
 @app.route('/register', methods=['GET', 'POST'])
