@@ -1,17 +1,17 @@
-# from itertools import product
-from itertools import product
+
 from .forms import RegistrationForm, LoginForm
 from flask import render_template, session, request, url_for, flash, redirect
 from shop import app, db, bcrypt
 from .models import User
-from shop.products.models import Addproduct
+from shop.products.models import Addproduct, Brand, Category
+import os
 
 # @app.route('/')
 # def home():
 #     return render_template('admin/index.html', title='Home Page')
 
 
-@app.route('/')
+@app.route('/admin')
 def admin():
     if 'email' not in session:
         flash('Please login first!', 'danger')
@@ -21,14 +21,31 @@ def admin():
     # print(products)
     return render_template('admin/index.html', title='Admin Page', products=products)
 
+
+
+
+
+
 @app.route('/brands')
 def brands():
     if 'email' not in session:
         flash('Please login first!', 'danger')
         return redirect(url_for('login'))
 
-    products = Addproduct.query.all()
-    return render_template('admin/brand.html',title="Brand Page", products=products)
+    brands = Brand.query.order_by(Brand.id.desc()).all()
+    
+    return render_template('admin/brand_category.html',title="Brand Page", brands=brands)
+
+@app.route('/brands/delete/<int:id>')
+def deletebrand(id):
+    brand = Brand.query.get_or_404(id)
+    db.session.delete(brand)
+    db.session.commit()
+    return redirect(url_for('brands'))
+
+
+
+
 
 @app.route('/categories')
 def categories():
@@ -36,8 +53,18 @@ def categories():
         flash('Please login first!', 'danger')
         return redirect(url_for('login'))
 
-    products = Addproduct.query.all()
-    return render_template('admin/category.html',title="Category Page", products=products)
+    categories = Category.query.order_by(Category.id.desc()).all()
+    return render_template('admin/brand_category.html',title="Category Page", categories=categories)
+
+@app.route('/categories/delete/<int:id>')
+def deletecat(id):
+    category = Category.query.get_or_404(id)
+    db.session.delete(category)
+    db.session.commit()
+    return redirect(url_for('categories'))
+
+
+
 
 
 @app.route('/register', methods=['GET', 'POST'])

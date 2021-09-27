@@ -52,34 +52,48 @@
     <table class="table table-sm table-condensed table-stripped">
         <thead>
             <th>Sr</th>
-            <th>Prodcuts</th>
-            <th>Price</th>
-            <th>Discount</th>
-            <th>Brand</th>
-            <th>Image</th>
+            <th>Name</th>
+            
             <th>Edit</th>
             <th>Delete</th>
         </thead>
 
         <tbody>
-          {% for product in products %}
+          {% if brands %}
+          {% for brand in brands %}
             <tr>
                 <td>{{ loop.index }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.discount }} %</td>
-                <!-- <td>{{ product.stock }}</td> -->
-                <td>{{ product.brand.name }}</td>
+                <td>{{ brand.name }}</td>
+                
+               
 
-                <td><img src="{{ url_for('static', filename='images/' + product.image_1) }}" width="50" height="40"></td>
+               
 
-                <td><a class="btn btn-sm btn-outline-info" href="/edit/{{ product.id }}">Edit</a></td>
-                <td><a class="btn btn-sm btn-outline-danger" href="/delete/{{ product.id }}">Delete</a></td>
+                <td><a class="btn btn-sm btn-outline-info" href="/brands/edit/{{ brand.id }}">Edit</a></td>
+                <td><a class="btn btn-sm btn-outline-danger" href="/brands/delete/{{ brand.id }}">Delete</a></td>
             </tr>
 
           {% endfor %}
+
+          {% else %}
+          {% for category in categories %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ category.name }}</td>
+                
+               
+
+               
+
+                <td><a class="btn btn-sm btn-outline-info" href="/categories/edit/{{ category.id }}">Edit</a></td>
+                <td><a class="btn btn-sm btn-outline-danger" href="/categories/delete/{{ category.id }}">Delete</a></td>
+            </tr>
+
+          {% endfor %}
+          {% endif %}
             </tbody>
     </table>
 </div>
 
 {% endblock %}
+d
