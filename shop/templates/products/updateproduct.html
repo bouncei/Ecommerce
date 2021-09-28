@@ -38,19 +38,20 @@
         <div class="container">
           <div class="row">
             <div class="col-md-4">
-              <input type="file" name="image_1" class="form-control">
+              {{ render_field(form.image_1 ,class="form-control") }}
             </div>
             <div class="col-md-4">
-              <input type="file" name="image_2" class="form-control">
+              {{ render_field(form.image_2 ,class="form-control") }}
             </div>
             <div class="col-md-4">
-              <input type="file" name="image_3" class="form-control">
+              {{ render_field(form.image_3 ,class="form-control") }}
             </div>
           </div>
         </div>
         
-        <input type="submit" value="Add Product " class="btn btn-info mt-3" />
+        <input type="submit" value="Update Product " class="btn btn-info mt-3" />
       </form>
+      <a href="{{url_for('admin')}}" class="btn btn-warning" style="margin-top: -65px; margin-left: 153px;">Cancel</a>
     </div>
   </div>
 </div>
