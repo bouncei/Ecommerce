@@ -2,7 +2,7 @@
 
 <div class="container">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Admin</a>
+    <a class="navbar-brand" href="/admin">Admin</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -17,15 +17,15 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="#"
-            >Home <span class="sr-only">(current)</span></a
+          <a class="nav-link" href="/admin"
+            >Home</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="/brands">Brands</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" href="/categories">Categories</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -73,7 +73,7 @@
 
                 <td><img src="{{ url_for('static', filename='images/' + product.image_1) }}" width="50" height="40"></td>
 
-                <td><a class="btn btn-sm btn-outline-info" href="/edit/{{ product.id }}">Edit</a></td>
+                <td><a class="btn btn-sm btn-outline-info" href="{{url_for('updateproduct', id=product.id)}}">Edit</a></td>
                 <td><a class="btn btn-sm btn-outline-danger" href="/delete/{{ product.id }}">Delete</a></td>
             </tr>
 

@@ -23,9 +23,6 @@ def admin():
 
 
 
-
-
-
 @app.route('/brands')
 def brands():
     if 'email' not in session:
@@ -35,6 +32,29 @@ def brands():
     brands = Brand.query.order_by(Brand.id.desc()).all()
     
     return render_template('admin/brand_category.html',title="Brand Page", brands=brands)
+
+
+@app.route('/updatebrand/<int:id>', methods= ["GET", "POST"])
+def updatebrand(id):
+    if "email" not in session:
+        flash('Please login first!', 'danger')
+        return redirect(url_for('login'))
+    
+
+    update_brand = Brand.query.get_or_404(id)
+    name = update_brand.name
+    brand = request.form.get('brand')
+
+    if request.method == "POST":
+        update_brand.name = brand
+        
+        flash(f'The brand name {name} has been updated to {update_brand.name}', 'success')
+        db.session.commit()
+        
+        return redirect(url_for('brands'))
+
+    return render_template('admin/updatebrand.html', title="Update Brand Page", update_brand=update_brand)
+
 
 @app.route('/brands/delete/<int:id>')
 def deletebrand(id):
@@ -56,12 +76,33 @@ def categories():
     categories = Category.query.order_by(Category.id.desc()).all()
     return render_template('admin/brand_category.html',title="Category Page", categories=categories)
 
+
+@app.route('/updatecategory/<int:id>', methods= ["GET", "POST"])
+def updatecategory(id):
+    update_category = Category.query.get_or_404(id)
+    name = update_category.name
+
+    category = request.form.get('category')
+
+    if request.method == "POST":
+        update_category.name = category
+        
+        flash(f'The category name {name} has been updated to {update_category.name}', 'success')
+        db.session.commit()
+        
+        return redirect(url_for('categories'))
+
+    return render_template('admin/updatebrand.html', title="Update Brand Page", update_category=update_category)
+
+
 @app.route('/categories/delete/<int:id>')
 def deletecat(id):
     category = Category.query.get_or_404(id)
     db.session.delete(category)
     db.session.commit()
     return redirect(url_for('categories'))
+
+
 
 
 
