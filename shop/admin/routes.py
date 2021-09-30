@@ -56,11 +56,15 @@ def updatebrand(id):
     return render_template('admin/updatebrand.html', title="Update Brand Page", update_brand=update_brand)
 
 
-@app.route('/brands/delete/<int:id>')
+@app.route('/brands/delete/<int:id>', methods=["GET", "POST"])
 def deletebrand(id):
     brand = Brand.query.get_or_404(id)
+    name = brand.name
     db.session.delete(brand)
     db.session.commit()
+
+    flash(f'The brand {name} has been deleted from the database', 'success')
+
     return redirect(url_for('brands'))
 
 
@@ -95,11 +99,15 @@ def updatecategory(id):
     return render_template('admin/updatebrand.html', title="Update Brand Page", update_category=update_category)
 
 
-@app.route('/categories/delete/<int:id>')
+@app.route('/categories/delete/<int:id>', methods=["GET", "POST"])
 def deletecat(id):
     category = Category.query.get_or_404(id)
+    name = category.name
     db.session.delete(category)
     db.session.commit()
+
+    flash(f'The category {name} has been deleted from the database', 'success')
+
     return redirect(url_for('categories'))
 
 

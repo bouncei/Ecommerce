@@ -69,9 +69,35 @@
 
                
 
-                <td><a class="btn btn-sm btn-outline-info" href="/updatebrand/{{ brand.id }}">Edit</a></td>
-                <td><a class="btn btn-sm btn-outline-danger" href="/brands/delete/{{ brand.id }}">Delete</a></td>
+                <td><a class="btn btn-sm " href="/updatebrand/{{ brand.id }}" style="background-color: #0d6efd; color: white;">Edit</a></td>
+                <td>
+                  <!-- <a class="btn btn-sm btn-outline-danger" href="/brands/delete/{{ brand.id }}">Delete</a> -->
+                  <button class="btn btn-sm btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ brand.id }}">Delete</button>
+                </td>
             </tr>
+
+            <!-- Modal -->
+<div class="modal fade" id="exampleModal-{{ brand.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ brand.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <span class="text-danger">Are you sure that you want to delete {{ brand.name }}?</span>
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-warning" data-bs-dismiss="modal">Cancel</button>
+        <form action="/brands/delete/{{ brand.id }}" method="POST">
+          <button type="submit" class="btn btn-danger">Delete</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
           {% endfor %}
 
@@ -85,9 +111,36 @@
 
                
 
-                <td><a class="btn btn-sm btn-outline-info" href="/updatecategory/{{ category.id }}">Edit</a></td>
-                <td><a class="btn btn-sm btn-outline-danger" href="/categories/delete/{{ category.id }}">Delete</a></td>
+                <td><a class="btn btn-sm " href="/updatecategory/{{ category.id }}" style="background-color: #0d6efd; color: white;">Edit</a></td>
+                <td>
+                  <!-- <a class="btn btn-sm btn-outline-danger" href="/categories/delete/{{ category.id }}">Delete</a> -->
+                  <button class="btn btn-sm btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ category.id }}">Delete</button>
+
+                </td>
             </tr>
+
+                        <!-- Modal -->
+<div class="modal fade" id="exampleModal-{{ category.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ category.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <span class="text-danger">Are you sure that you want to delete {{ category.name }}?</span>
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-warning" data-bs-dismiss="modal">Cancel</button>
+        <form action="/categories/delete/{{ category.id }}" method="POST">
+          <button type="submit" class="btn btn-danger">Delete</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
           {% endfor %}
           {% endif %}

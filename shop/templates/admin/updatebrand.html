@@ -6,7 +6,7 @@
     <div class="col-md-6">
       {% include '_messages.html' %}
       {% if update_brand %}
-      <h1 class="text-center mt-5">Add a brand</h1>
+      <h1 class="text-center mt-5">Update brand</h1>
       <form action="" method="POST">
         <input
           type="text"
@@ -16,15 +16,15 @@
         />
         <input type="submit" value="Update brand" class="btn btn-info mt-3" />
     </form>
-    <a href="{{url_for('brands')}}" class="btn btn-warning" style="margin-top: -65px; margin-left: 140px;">Cancel</a>
+    <a href="{{url_for('brands')}}" class="btn btn-warning" style="margin-top: -65px; margin-left: 153px;">Cancel</a>
 
       {% else %}
-      <h1 class="text-center mt-5">Add a category</h1>
+      <h1 class="text-center mt-5">Update category</h1>
       <form action="" method="POST">
         <input type="text" name="category" class="form-control" value='{{ update_category.name }}' />
         <input type="submit" value="Update category" class="btn btn-info mt-3" />
       </form>
-      <a href="{{url_for('categories')}}" class="btn btn-warning" style="margin-top: -65px; margin-left: 140px;">Cancel</a>
+      <a href="{{url_for('categories')}}" class="btn btn-warning" style="margin-top: -65px; margin-left: 153px;">Cancel</a>
 
       {% endif %}
     </div>

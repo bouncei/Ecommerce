@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 mt-3">
+            <div class="card">
+                {% if product.discount > 0 %}
+                <p style="color: red; text-shadow: 2px 3px 3px #000; transform: rotate(-40deg); position: absolute; top: 3%; left: -5%; right: 50%;">Discount {{ product.discount }}%</p>
+                {% endif %}
+                <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{ product.name }}" class="class-img-top" height="200">
+                <div class="card-body">
+                    <h5 class="text-center">{{ product.name }}</h5>
+                    <p class="text-center">Price: &#8358;{{ product.price }} </p>
+
+                </div>
+                <div class="card-footer">
+                    <a class="float-left btn btn-sm" style="background-color: #0d6efd; color: black;">Details</a>
+                    <a class="float-right btn btn-sm btn-warning" style="margin-left: 69.5px;">Add to cart</a>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

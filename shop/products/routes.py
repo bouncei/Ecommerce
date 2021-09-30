@@ -1,3 +1,4 @@
+from itertools import product
 from flask import redirect, render_template, url_for, flash, request, session, current_app
 from shop import db, app, photos
 from .models import Brand, Category, Addproduct
@@ -5,6 +6,12 @@ from .models import Brand, Category, Addproduct
 from .forms import Addproducts
 import secrets
 import os
+
+
+@app.route('/')
+def home():
+    products = Addproduct.query.filter(Addproduct.stock > 0)
+    return render_template('products/index.html', title='Home Page', products=products)
 
 
 
@@ -135,9 +142,27 @@ def updateproduct(id):
 
 
 
-@app.route('/delete/<int:id>')
+@app.route('/delete/<int:id>', methods=["GET", "POST"])
 def delete(id):
-    post = Addproduct.query.get_or_404(id)
-    db.session.delete(post)
-    db.session.commit()
+    product = Addproduct.query.get_or_404(id)
+    name = product.name
+    if request.method == "POST":
+        try:
+            os.unlink(os.path.join(current_app.root_path, "static/images/" + product.image_1))
+            os.unlink(os.path.join(current_app.root_path, "static/images/" + product.image_2))
+            os.unlink(os.path.join(current_app.root_path, "static/images/" + product.image_3))
+
+        except Exception as e:
+            print(e)
+
+        db.session.delete(product)
+        db.session.commit()
+        flash(f'The product {name} has been deleted from your record', 'success')
+
+        return redirect(url_for('admin'))
+
+    
+
+
+    flash(f'Can\'t the product {name} ', 'danger')
     return redirect(url_for('admin'))

@@ -73,9 +73,35 @@
 
                 <td><img src="{{ url_for('static', filename='images/' + product.image_1) }}" width="50" height="40"></td>
 
-                <td><a class="btn btn-sm btn-outline-info" href="{{url_for('updateproduct', id=product.id)}}">Edit</a></td>
-                <td><a class="btn btn-sm btn-outline-danger" href="/delete/{{ product.id }}">Delete</a></td>
+                <td><a class="btn btn-sm " href="{{url_for('updateproduct', id=product.id)}}" style="background-color: #0d6efd; color: white;">Edit</a></td>
+                <td>
+                  <!-- <a class="btn btn-sm btn-danger" href="/delete/{{ product.id }}">Delete</a> -->
+                  <button class="btn btn-sm btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ product.id }}">Delete</button>
+                </td>
             </tr>
+
+                                    <!-- Modal -->
+<div class="modal fade" id="exampleModal-{{ product.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ product.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <span class="text-danger">Are you sure that you want to delete {{ product.name }}?</span>
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-warning" data-bs-dismiss="modal">Cancel</button>
+        <form action="/delete/{{ product.id }}" method="POST">
+          <button type="submit" class="btn btn-danger">Delete</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
           {% endfor %}
             </tbody>
