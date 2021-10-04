@@ -11,8 +11,16 @@ import os
 @app.route('/')
 def home():
     products = Addproduct.query.filter(Addproduct.stock > 0)
-    return render_template('products/index.html', title='Home Page', products=products)
+    brands = Brand.query.all()
+    categories = Category.query.all()
+    return render_template('products/index.html', title='Home Page', products=products, brands=brands, categories=categories)
 
+@app.route('/nice')
+def nice():
+    products = Addproduct.query.filter(Addproduct.stock > 0)
+    brands = Brand.query.all()
+    categories = Category.query.all()
+    return render_template('products/nice.html', title='Nice Page', products=products, brands=brands, categories=categories)
 
 
 

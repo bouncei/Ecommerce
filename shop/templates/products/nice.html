@@ -1,0 +1,48 @@
+{% extends "layout.html" %} {% block content %} {% include '_messages.html' %}
+
+<div class="container nicehead" id="adminbody ">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/admin">Admin</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/admin"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/brands">Brands</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/categories">Categories</a>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Brands
+          </a>
+          <div class="dropdown-menu niceintel" aria-labelledby="navbarDropdown">
+            {% for brand in brands %}
+
+            <a href="#" class="dropdown-item">{{ brand.name }}</a>
+
+            {% endfor %}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+{% endblock %}
