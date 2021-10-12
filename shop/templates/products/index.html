@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        {% for product in products %}
+        {% for product in products.items %}
         <div class="col-md-3 mt-3">
             <div class="card">
                 {% if product.discount > 0 %}
@@ -23,6 +23,12 @@
             </div>
         </div>
         {% endfor %}
+        {% for page_num in products.iter_pages() %}
+
+        {{ page_num }}
+
+        {% endfor %}
+
     </div>
 </div>
 

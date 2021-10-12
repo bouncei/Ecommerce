@@ -3,8 +3,10 @@
 {% block content %}
 {% include '_messages.html' %}
 <div class="container">
+    <h1>Create an</h1>
+    <h1>Account: </h1>
     {% from "_formhelpers.html" import render_field %}
-    <form method="post", enctype="multipart/form-data">
+    <form method="post", enctype="multipart/form-data" class="boss">
         <div>
             {{ render_field(form.name ,class="form-control admin") }}
             {{ render_field(form.username ,class="form-control admin") }} 
@@ -16,7 +18,8 @@
             <input type="file", name="photo">
         </div>
     <p><input type=submit value="Register" class="btn btn-info form-control admin"></p>
-    </form>
+    <p> Already have an account?<a href="/login"> login</a></p>
+</form>
 </div>
 
 

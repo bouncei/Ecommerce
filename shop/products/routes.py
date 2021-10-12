@@ -10,7 +10,8 @@ import os
 
 @app.route('/')
 def home():
-    products = Addproduct.query.filter(Addproduct.stock > 0)
+    page = request.args.get('page', 1, type=int)
+    products = Addproduct.query.filter(Addproduct.stock > 0).paginate(page=page, per_page=4)
     brands = Brand.query.all()
     categories = Category.query.all()
     return render_template('products/index.html', title='Home Page', products=products, brands=brands, categories=categories)
@@ -55,7 +56,8 @@ def addcat():
         flash(f'The brand {category_name} has been added to the database', 'success')
         db.session.commit()
         return redirect(url_for('addcat'))
-    return render_template('products/addbrand.html')
+
+    return render_template('products/addbrand.html', title= 'Add Category')
 
 
 

@@ -4,8 +4,9 @@
 {% include '_messages.html' %}
 
 <div class="container">
+    <h1 style="margin-top: 10px;">Login: </h1>
     {% from "_formhelpers.html" import render_field %}
-    <form method="post", enctype="multipart/form-data">
+    <form method="post", enctype="multipart/form-data" class="boss">
         <div>
         
             {{ render_field(form.email ,class="form-control admin") }}
@@ -16,6 +17,8 @@
             
         </div>
     <p><input type=submit value="Register" class="btn btn-info form-control admin"></p>
+
+    <p>Don't have an account? <a href="/register">  Sign Up</a></p>
     </form>
 </div>
 

@@ -377,3 +377,25 @@ label {
   font-size: 15px;
 }
 
+
+
+
+.boss {
+  padding-left: 12%;
+  padding-top: 2%;
+}
+
+
+h1 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: rgb(138, 123, 123);
+  font-style: italic;
+  /* font-size: x-large; */
+}
+
+
+.card-footer {
+  display: flex;
+  justify-content: space-around;
+}
+
