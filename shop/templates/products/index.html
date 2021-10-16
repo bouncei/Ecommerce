@@ -22,12 +22,31 @@
                 </div>
             </div>
         </div>
-        {% endfor %}
-        {% for page_num in products.iter_pages() %}
+        {% endfor %}  
 
-        {{ page_num }}
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            {% for page_num in products.iter_pages() %}
 
-        {% endfor %}
+            {% if page_num %}
+
+            
+            {% if products.page == page_num %}
+            <a href="{{url_for('home', page=page_num) }}" class="btn btn-sm mt-3" style="color: #000;
+            background-color: #0dcaf0;
+            border-color: #0dcaf0;">{{ page_num }}</a>
+            {% else %}
+            <a href="{{url_for('home', page=page_num) }}" class="btn btn-outline-info btn-sm mt-3">{{ page_num }}</a>
+
+            {% endif %}
+            
+            {% else %}
+            
+            {% endif %}    
+            {% endfor %}
+
+        </div>
 
     </div>
 </div>
