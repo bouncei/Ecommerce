@@ -23,6 +23,11 @@ def nice():
     categories = Category.query.all()
     return render_template('products/nice.html', title='Nice Page', products=products, brands=brands, categories=categories)
 
+@app.route('/get-brand/<int:id>')
+def get_brand(id):
+
+    brand = Addproduct.query.filter(brand_id=id)
+    return render_template('products/index.html', title='Home Page', brand=brand)
 
 
 

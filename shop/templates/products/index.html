@@ -1,6 +1,69 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="container">
+
+
+<div class="container nicehead" id="adminbody ">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/admin">Admin</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/"
+            >All Products</a
+          >
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Categories</a>
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for category in categories %}
+              <a href="" class="dropdown-item">{{category.name}}</a>
+      
+              {% endfor %}
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Brands
+          </a>
+          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            {% for brand in brands %}
+
+            <a href="#" class="dropdown-item">{{ brand.name }}</a>
+
+            {% endfor %}
+           
+          </div>
+        </li>
+
+        <form class="d-flex " style="justify-content: center;" id="searchboss">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+
+
+<div class="container mt-5">
     <div class="row">
         {% for product in products.items %}
         <div class="col-md-3 mt-3">

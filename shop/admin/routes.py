@@ -18,8 +18,9 @@ def admin():
         return redirect(url_for('login'))
     
     products = Addproduct.query.all()
+    brands = Brand.query.all()
     # print(products)
-    return render_template('admin/index.html', title='Admin Page', products=products)
+    return render_template('admin/index.html', title='Admin Page', products=products, brands=brands)
 
 
 
