@@ -16,6 +16,12 @@ def home():
     categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
     return render_template('products/index.html', title='Home Page', products=products, brands=brands, categories=categories)
 
+@app.route('/details/<int:id>')
+def details(id):
+    product = Addproduct.query.get_or_404(id)
+    
+    return render_template('products/details.html', title='Product details', product=product)
+
 @app.route('/brand/<int:id>')
 def get_brand(id):
 

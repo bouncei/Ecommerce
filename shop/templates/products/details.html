@@ -1,0 +1,123 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+
+
+<div class="container nicehead" id="adminbody ">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/admin">Admin</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/"
+              >All Products</a
+            >
+          </li>
+          
+         
+<!--   
+          <form class="d-flex " style="justify-content: center;" id="searchboss">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form> -->
+          
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6" id='b_image'>
+            <!-- <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{product.name}}" style="object-fit: cover;" width="450px" height="400px"> -->
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner" data-bs-interval="4000">
+                <div class="carousel-item active" id='b_image1'>
+                  <img src="{{url_for('static', filename='images/' + product.image_1)}}" class="d-block w-100" alt="{{ product.name }}" style="object-fit: cover;" width="450px" height="400px">
+                </div>
+                <div class="carousel-item">
+                  <img src="{{url_for('static', filename='images/' + product.image_2)}}" class="d-block w-100" alt="{{ product.name }}" style="object-fit: cover;" width="450px" height="400px">
+                </div>
+                <div class="carousel-item">
+                  <img src="{{url_for('static', filename='images/' + product.image_3)}}" class="d-block w-100" alt="{{ product.name }}" style="object-fit: cover;" width="450px" height="400px">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+          <h3 class="text-center"><b>{{ product.name }}</b></h3>
+          
+          <hr>
+          <p>Price : {{ product.price }}</p>
+          {% if product.discount > 0 %}
+                    <p style="color: red; text-shadow: 0px 0px 2px #000;">Discount: {{ product.discount }}%</p>
+                    {% endif %}
+          
+          <hr>
+          <h5> Product Details </h5>  
+          <p>{{ product.desc }}</p>
+
+          <form action="{{ url_for('add_cart') }}">
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <button class="btn btn-warning" type="submit"> Add to cart</button>
+
+            <label for="quality">Quality:</label>
+            <input type="number" name="quality" id="" value="1" min="1" max="{{ product.stock }}">
+            {% set colors = product.colors.split(',') %}
+            <label for="colors">Colours:</label>
+            <select name="colors" id="">
+              {% for color in colors %}
+              {% set col = coloor.slipt(':') %}
+              <option value="{{col[0]}}">{{ col[0]|capitalize }}</option>
+              {% endfor %}
+            </select>
+          </form>
+
+          <div class="d-grid gap-2">
+            <button class="btn btn-warning" type="button">Add to cart</button>
+          </div>
+          
+
+
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12" id="s_image">
+        <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{ product.name }}" width="150px" height="150px" class="p-3" style="object-fit: cover;">
+        <img src="{{url_for('static', filename='images/' + product.image_2)}}" alt="{{ product.name }}" width="150px" height="150px" class="p-3" style="object-fit: cover;">
+        <img src="{{url_for('static', filename='images/' + product.image_3)}}" alt="{{ product.name }}" width="150px" height="150px" class="p-3" style="object-fit: cover;">
+      </div>
+    </div>
+</div>
+
+
+{% endblock content %}
