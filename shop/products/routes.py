@@ -16,19 +16,25 @@ def home():
     categories = Category.query.all()
     return render_template('products/index.html', title='Home Page', products=products, brands=brands, categories=categories)
 
-@app.route('/nice')
-def nice():
-    products = Addproduct.query.filter(Addproduct.stock > 0)
-    brands = Brand.query.all()
-    categories = Category.query.all()
-    return render_template('products/nice.html', title='Nice Page', products=products, brands=brands, categories=categories)
+# @app.route('/nice')
+# def nice():
+#     products = Addproduct.query.filter(Addproduct.stock > 0)
+#     brands = Brand.query.all()
+#     categories = Category.query.all()
+#     return render_template('products/nice.html', title='Nice Page', products=products, brands=brands, categories=categories)
 
-@app.route('/get-brand/<int:id>')
+@app.route('/brand/<int:id>')
 def get_brand(id):
 
-    brand = Addproduct.query.filter(brand_id=id)
-    return render_template('products/index.html', title='Home Page', brand=brand)
+    brand = Addproduct.query.filter_by(brand_id=id)
+    return render_template('products/index.html', brand=brand)
 
+
+@app.route('/category/<int:id>')
+def get_category(id):
+
+    category = Addproduct.query.filter_by(category_id = id)
+    return render_template('products/index.html', category=category)
 
 
 @app.route('/addbrand', methods=['GET', 'POST'])

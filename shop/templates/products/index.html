@@ -2,6 +2,7 @@
 {% block content %}
 
 
+
 <div class="container nicehead" id="adminbody ">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/admin">Admin</a>
@@ -30,7 +31,7 @@
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               {% for category in categories %}
-              <a href="" class="dropdown-item">{{category.name}}</a>
+              <a href="{{ url_for('get_category', id = category.id) }}" class="dropdown-item">{{category.name}}</a>
       
               {% endfor %}
             </div>
@@ -43,7 +44,7 @@
           <div class="dropdown-menu " aria-labelledby="navbarDropdown">
             {% for brand in brands %}
 
-            <a href="#" class="dropdown-item">{{ brand.name }}</a>
+            <a href="{{ url_for('get_brand', id=brand.id) }}" class="dropdown-item">{{ brand.name }}</a>
 
             {% endfor %}
            
@@ -65,6 +66,63 @@
 
 <div class="container mt-5">
     <div class="row">
+
+      {% if brand %}
+
+            {% for b in brand %}
+            <div class="col-md-3 mt-3">
+                <div class="card">
+                    {% if b.discount > 0 %}
+                    <p style="color: red; text-shadow: 2px 3px 3px #000; transform: rotate(-40deg); position: absolute; top: 3%; left: -5%; right: 50%;">Discount {{ b.discount }}%</p>
+                    {% endif %}
+                    <img src="{{url_for('static', filename='images/' + b.image_1)}}" alt="{{ b.name }}" class="class-img-top" height="200">
+                    <div class="card-body">
+                        <h5 class="text-center">{{ b.name }}</h5>
+                        <p class="text-center">Price: &#8358;{{ b.price }} </p>
+    
+                    </div>
+                    <div class="card-footer">
+                        <a class="float-left btn btn-sm" style="background-color: #0d6efd; color: black;">Details</a>
+                        <a class="float-right btn btn-sm btn-warning" style="margin-left: 69.5px;">Add to cart</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            {% endfor %} 
+
+    </div>
+
+    <div class="row">
+        {% elif category %}
+        {% for cat in category %}
+
+        
+        <div class="col-md-3 mt-3">
+            <div class="card">
+                {% if cat.discount > 0 %}
+                <p style="color: red; text-shadow: 2px 3px 3px #000; transform: rotate(-40deg); position: absolute; top: 3%; left: -5%; right: 50%;">Discount {{ cat.discount }}%</p>
+                {% endif %}
+                <img src="{{url_for('static', filename='images/' + cat.image_1)}}" alt="{{ cat.name }}" class="class-img-top" height="200">
+                <div class="card-body">
+                    <h5 class="text-center">{{ cat.name }}</h5>
+                    <p class="text-center">Price: &#8358;{{ cat.price }} </p>
+
+                </div>
+                <div class="card-footer">
+                    <a class="float-left btn btn-sm" style="background-color: #0d6efd; color: black;">Details</a>
+                    <a class="float-right btn btn-sm btn-warning" style="margin-left: 69.5px;">Add to cart</a>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %} 
+
+        </div>
+
+        <div class="row">
+        {% else %}
         {% for product in products.items %}
         <div class="col-md-3 mt-3">
             <div class="card">
@@ -86,9 +144,8 @@
             </div>
         </div>
         {% endfor %}  
-
-    </div>
-    <div class="row">
+      </div>
+      <div class="row">
         <div class="col text-center">
             {% for page_num in products.iter_pages() %}
 
@@ -112,6 +169,17 @@
         </div>
 
     </div>
+
+        {% endif %}
+
+ 
+</div>
+
+<!-- Products.items in version control history -->
+
+
+    
+  
 </div>
 
 {% endblock content %}
