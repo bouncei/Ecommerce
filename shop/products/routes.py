@@ -12,29 +12,32 @@ import os
 def home():
     page = request.args.get('page', 1, type=int)
     products = Addproduct.query.filter(Addproduct.stock > 0).paginate(page=page, per_page=4)
-    brands = Brand.query.all()
-    categories = Category.query.all()
+    brands = Brand.query.join(Addproduct, (Brand.id == Addproduct.brand_id)).all()
+    categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
     return render_template('products/index.html', title='Home Page', products=products, brands=brands, categories=categories)
-
-# @app.route('/nice')
-# def nice():
-#     products = Addproduct.query.filter(Addproduct.stock > 0)
-#     brands = Brand.query.all()
-#     categories = Category.query.all()
-#     return render_template('products/nice.html', title='Nice Page', products=products, brands=brands, categories=categories)
 
 @app.route('/brand/<int:id>')
 def get_brand(id):
 
     brand = Addproduct.query.filter_by(brand_id=id)
-    return render_template('products/index.html', brand=brand)
+
+    brands = Brand.query.join(Addproduct, (Brand.id == Addproduct.brand_id)).all()
+    categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
+
+
+    return render_template('products/index.html', brand=brand, brands=brands, categories=categories)
 
 
 @app.route('/category/<int:id>')
 def get_category(id):
 
     category = Addproduct.query.filter_by(category_id = id)
-    return render_template('products/index.html', category=category)
+    
+    brands = Brand.query.join(Addproduct, (Brand.id == Addproduct.brand_id)).all()
+    categories = Category.query.join(Addproduct, (Category.id == Addproduct.category_id)).all()
+
+
+    return render_template('products/index.html', category=category, brands=brands, categories=categories)
 
 
 @app.route('/addbrand', methods=['GET', 'POST'])

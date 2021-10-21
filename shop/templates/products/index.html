@@ -147,11 +147,12 @@
       </div>
       <div class="row">
         <div class="col text-center">
+            {% if products.has_prev %}
+            <a href="{{url_for('home', page=products.has_prev) }}" class="btn btn-outline-info btn-sm mt-3">Previous</a>
+            {% endif %}
             {% for page_num in products.iter_pages() %}
 
             {% if page_num %}
-
-            
             {% if products.page == page_num %}
             <a href="{{url_for('home', page=page_num) }}" class="btn btn-sm mt-3" style="color: #000;
             background-color: #0dcaf0;
@@ -165,6 +166,10 @@
             
             {% endif %}    
             {% endfor %}
+
+            {% if products.has_next %}
+            <a href="{{url_for('home', page=products.has_next) }}" class="btn btn-outline-info btn-sm mt-3">Next</a>
+            {% endif %}
 
         </div>
 
