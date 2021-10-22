@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+{% include '_messages.html' %}
+
 
 
 <div class="container nicehead" id="adminbody ">
@@ -24,6 +26,42 @@
               >All Products</a
             >
           </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categories</a>
+  
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for category in categories %}
+                <a href="{{ url_for('get_category', id = category.id) }}" class="dropdown-item">{{category.name}}</a>
+        
+                {% endfor %}
+              </div>
+          </li>
+  
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Brands
+            </a>
+            <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+              {% for brand in brands %}
+  
+              <a href="{{ url_for('get_brand', id=brand.id) }}" class="dropdown-item">{{ brand.name }}</a>
+  
+              {% endfor %}
+             
+            </div>
+          </li>
+
+          <li class="nav-item active">
+            <a href="#" class="nav-item disabled" tabindex="1" > Cart({{ session['Shoppingcart']|length }})</a>
+
+          </li>
+  
+          <form class="d-flex " style="justify-content: center;" id="searchboss">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
           
          
 <!--   
@@ -89,21 +127,21 @@
             <input type="hidden" name="product_id" value="{{ product.id }}">
             <button class="btn btn-warning" type="submit"> Add to cart</button>
 
-            <label for="quality">Quality:</label>
+            <label for="quality">Quality: </label>
             <input type="number" name="quality" id="" value="1" min="1" max="{{ product.stock }}">
             {% set colors = product.colors.split(',') %}
-            <label for="colors">Colours:</label>
+            <label for="colors">Colors: </label>
             <select name="colors" id="">
               {% for color in colors %}
-              {% set col = coloor.slipt(':') %}
+              {% set col = color.split(':') %}
               <option value="{{col[0]}}">{{ col[0]|capitalize }}</option>
               {% endfor %}
             </select>
           </form>
-
+<!-- 
           <div class="d-grid gap-2">
             <button class="btn btn-warning" type="button">Add to cart</button>
-          </div>
+          </div> -->
           
 
 
