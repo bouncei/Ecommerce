@@ -53,7 +53,7 @@
             </div>
           </li>
 
-          <li class="nav-item active">
+          <li class="nav-item">
             <a href="#" class="nav-item disabled" tabindex="1" > Cart({{ session['Shoppingcart']|length }})</a>
 
           </li>
@@ -123,12 +123,12 @@
           <h5> Product Details </h5>  
           <p>{{ product.desc }}</p>
 
-          <form action="{{ url_for('add_cart') }}">
+          <form action="{{ url_for('add_cart') }}" method="post">
             <input type="hidden" name="product_id" value="{{ product.id }}">
             <button class="btn btn-warning" type="submit"> Add to cart</button>
 
-            <label for="quality">Quality: </label>
-            <input type="number" name="quality" id="" value="1" min="1" max="{{ product.stock }}">
+            <label for="">Quantity: </label>
+            <input type="number" name="quantity" id="" value="1" min="1" max="{{ product.stock }}">
             {% set colors = product.colors.split(',') %}
             <label for="colors">Colors: </label>
             <select name="colors" id="">
@@ -150,12 +150,28 @@
 
     <div class="row">
       <div class="col-md-12" id="s_image">
-        <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{ product.name }}" width="150px" height="150px" class="p-3" style="object-fit: cover;">
-        <img src="{{url_for('static', filename='images/' + product.image_2)}}" alt="{{ product.name }}" width="150px" height="150px" class="p-3" style="object-fit: cover;">
-        <img src="{{url_for('static', filename='images/' + product.image_3)}}" alt="{{ product.name }}" width="150px" height="150px" class="p-3" style="object-fit: cover;">
+        <img src="{{url_for('static', filename='images/' + product.image_1)}}" alt="{{ product.name }}" width="150px" height="150px" class="p-3" style="object-fit: cover; cursor: pointer;">
+        <img src="{{url_for('static', filename='images/' + product.image_2)}}" alt="{{ product.name }}" width="150px" height="150px" class="p-3" style="object-fit: cover; cursor: pointer;">
+        <img src="{{url_for('static', filename='images/' + product.image_3)}}" alt="{{ product.name }}" width="150px" height="150px" class="p-3" style="object-fit: cover; cursor: pointer;">
       </div>
     </div>
 </div>
 
+
+<script>
+  var b_image = document.getElementById('b_image')
+  var s_image = document.getElementById('s_image').getElementsByTagName('img')
+
+  for(let i = 0; i < s_image.length; i++){
+    s_image[i].addEventListener('click', fullImage)
+  }
+
+function fullImage(){
+  imageSrc = this.getAttribute('src')
+  b_image.innerHTML = "<img src='"+ imageSrc +"'class='w-100 d-block' width='450px' height='400px;' style='object-fit: cover;'>"
+}
+
+
+</script>
 
 {% endblock content %}
