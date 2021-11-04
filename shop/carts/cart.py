@@ -21,12 +21,12 @@ def add_cart():
         print(quantity,colors)
 
         product = Addproduct.query.filter_by(id=product_id).first()
-        if product_id and quantity and colors and request.method == "POST":
-            dicItems = {product_id: {'name': product.name, 'price': product.price,
-            'discount': product.discount, 'colors': colors, 'quantity': quantity, 'image': product.image_1}}
+        # if product_id and quantity and colors and request.method == "POST":
+        #     dicItems = {product_id: {'name': product.name, 'price': product.price,
+        #     'discount': product.discount, 'colors': colors, 'quantity': quantity, 'image': product.image_1}}
 
-            if 'Shoppingcart' in session:
-                print(session['Shoppingcart'])
+        #     if 'Shoppingcart' in session:
+        #         print(session['Shoppingcart'])
 
                 # if product_id in session['Shoppingcart']:
                 #     print('This product is already in cart')
@@ -36,9 +36,9 @@ def add_cart():
                 #     flash(f"{product.name} has succesfully been added to cart", 'success')
                 #     return redirect(request.referrer)
 
-            else:
-                session['Shoppingcart'] = dicItems
-                return redirect(request.referrer)
+            # else:
+            #     session['Shoppingcart'] = dicItems
+            #     return redirect(request.referrer)
 
     except Exception as e:
         print(e)
