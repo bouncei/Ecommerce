@@ -9,7 +9,8 @@ def MagerDict(dict1, dict2):
         return dict1 + dict2
     
     elif isinstance(dict1, dict) and isinstance(dict2, dict):
-        return dict(list(dict1.items() + list(dict2.items())))
+        return dict(list(dict1.items()) + list(dict2.items()))
+
     return False
 
 @app.route('/addcart', methods=["POST"])
@@ -24,24 +25,24 @@ def add_cart():
         product = Addproduct.query.filter_by(id=product_id).first()
         string_product_price = str(product.price)
         
-        if request.method == "POST":
+        if quantity and colors and product_id and request.method == "POST":
             dicItems = {product_id: {'name': product.name, 'price': string_product_price,
             'discount': product.discount, 'colors': colors, 'quantity': quantity, 'image': product.image_1}}
 
-            print(dicItems)
+            # print(dicItems)
 
             if 'Shoppingcart' in session:
                 print(session['Shoppingcart'])
 
                 if product_id in session['Shoppingcart']:
-                    print('This product is already in cart')
-                    flash('This product is aldredy in cart', 'error')
+                    # print('This product is already in cart')
+                    flash('This product is already in cart', 'error')
                 else:
                     session['Shoppingcart'] = MagerDict(session['Shoppingcart'], dicItems)
                     flash(f"{product.name} has succesfully been added to cart", 'success')
                     return redirect(request.referrer)
 
-            # else:
+            else:
                 print("nothing Here Boss")
                 session['Shoppingcart'] = dicItems
                 return redirect(request.referrer)
