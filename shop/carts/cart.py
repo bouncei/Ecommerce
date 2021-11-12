@@ -52,24 +52,6 @@ def add_cart():
 
 
 
-            # if 'Shoppingcaart' not in session:
-                
-            #     session['Shoppingcart'] = dicItems
-            #     return redirect(request.referrer)
-
-
-            # else:
-            #     print(session['Shoppingcart'])
-
-            #     if product_id in session['Shoppingcart']:
-            #         print("This product is already in cart")
-            #         # flash("", "success")
-
-            #     else:
-            #         session['Shoppingcart'] = MagerDict(session['Shoppingcart'], dicItems)
-            #         flash(f"{product.name} has succesfully been added to cart", 'success')
-            #         return redirect(request.referrer)
-
 
     except Exception as e:
         print(e)
@@ -81,16 +63,10 @@ def add_cart():
 
 @app.route('/carts')
 def get_cart():
-
-    new_json = json.dumps(session['Shoppingcart'])
-    file = open('info.json', 'w')
-    file.write(new_json)
-    file.close()
-
-    print(session['Shoppingcar'].items())
+    print(session['Shoppingcart'].items())
 
     products = Addproduct.query.all()
     if 'Shoppingcart' not in session:
         return redirect(request.referrer)
 
-    return render_template('products/ok.html', title = "Carts")
+    return render_template('products/carts.html', title = "Carts")

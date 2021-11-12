@@ -15,15 +15,27 @@
             <th>Delete</th>
         </thead>
         <tbody>
-            {% for product in session['Shoppingcart'].items() %}
-            <td>{{ loop.index }}</td>
-            <td>{{ product }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            {% for key, item in session['Shoppingcart'].items() %}
+            {% set discount = "%0.2f"|format(item.discount/100 * item.price|float) %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.colors }}</td>
+                <td>&#8358;{{ item.price }}</td>
+                {% if item.discount > 0 %}
+                <td>{{ item.discount}}% off &nbsp; is &#8358;{{ discount }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
+
+                {% set subtotal = "%0.2f"|format(item.quantity|int * item.price|float) %}
+                <td>&#8358;{{ subtotal }}</td>
+                <td><a href="#">Update</a></td>
+                <td><a href="#">Delete</a></td>
+
+            </tr>
+            
+            {% endfor %}
         </tbody>
     </table>
 </div>
