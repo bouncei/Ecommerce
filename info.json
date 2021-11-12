@@ -1,0 +1,7 @@
+{"2": {"colors": "White", "discount": 0, "image": "d664e91ab4f9698bc098.jpg", "name": "Samsung Galaxy ", "price": "4000.00", "quantity": "1"},
+ "3": {"colors": "Black", "discount": 30, "image": "f484d978267dbd44c378.jpg", "name": "Boss Product", "price": "300.00", "quantity": "1"},
+ "4": {"colors": "Black", "discount": 5, "image": "d8173ffb14387eef0950.jpg", "name": "Apple Series 5", "price": "200000.00", "quantity": "1"},
+ "5": {"colors": "Silver", "discount": 2, "image": "69df741bc82860075d24.jpeg", "name": "Iphone 13", "price": "1000000.00", "quantity": "1"},
+ "9": {"colors": "Black", "discount": 0, "image": "d6eccf6050bdb44d6615.jpg", "name": "Samsung Galaxy S20", "price": "500000.00", "quantity": "1"}
+
+}

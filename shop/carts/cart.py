@@ -1,7 +1,10 @@
+from io import SEEK_SET
+from itertools import product
 import re
 from flask import request, render_template, redirect, session, current_app, flash
 from shop import db, app
 from shop.products.models import Addproduct
+import json
 
 
 def MagerDict(dict1, dict2):
@@ -72,3 +75,22 @@ def add_cart():
         print(e)
     finally:
         return redirect(request.referrer)
+
+
+
+
+@app.route('/carts')
+def get_cart():
+
+    new_json = json.dumps(session['Shoppingcart'])
+    file = open('info.json', 'w')
+    file.write(new_json)
+    file.close()
+
+    print(session['Shoppingcar'].items())
+
+    products = Addproduct.query.all()
+    if 'Shoppingcart' not in session:
+        return redirect(request.referrer)
+
+    return render_template('products/ok.html', title = "Carts")
