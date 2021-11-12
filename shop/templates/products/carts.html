@@ -9,6 +9,7 @@
             <th>Name</th>
             <th>Color</th>
             <th>Price</th>
+            <th>Quantity</th>
             <th>Discount</th>
             <th>Subtotal</th>
             <th>Update</th>
@@ -16,27 +17,40 @@
         </thead>
         <tbody>
             {% for key, item in session['Shoppingcart'].items() %}
-            {% set discount = "%0.2f"|format(item.discount/100 * item.price|float) %}
+            {% set discount = (item.discount/100) * (item.price|float) %}
             <tr>
                 <td>{{ loop.index }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.colors }}</td>
                 <td>&#8358;{{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
                 {% if item.discount > 0 %}
-                <td>{{ item.discount}}% off &nbsp; is &#8358;{{ discount }}</td>
+                <td>{{ item.discount}}% &nbsp; &nbsp; is &#8358;{{"%0.2f" |format(discount) }}</td>
                 {% else %}
                 <td></td>
                 {% endif %}
 
-                {% set subtotal = "%0.2f"|format(item.quantity|int * item.price|float) %}
-                <td>&#8358;{{ subtotal }}</td>
-                <td><a href="#">Update</a></td>
-                <td><a href="#">Delete</a></td>
+                {% set subtotal = item.quantity|int * item.price|float %}
+                <td>&#8358;{{ "%0.2f"|format((subtotal|float) - (discount|float)) }}</td>
+                <td><button href="#" class="btn btn-sm" style="background-color: #0d6efd; color: white;">Update</button></td>
+                <td>
+                    <button class="btn btn-sm btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal-">Delete</button>
+                </td>
 
             </tr>
             
             {% endfor %}
         </tbody>
+    </table>
+    
+    <table class="table table-sm">
+        <tr>
+            <td><a href="/">Countinue shopping</a></td>
+            <td colspan="3"><h5>Text: {{tax}}</h5></td>
+            <td colspan="3"> <h3>Grand Total; {{grandTotal}}</h3></td>
+            
+        </tr>
+
     </table>
 </div>
 

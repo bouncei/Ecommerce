@@ -53,9 +53,10 @@
             </div>
           </li>
 
-          <li class="nav-item">
-            <a href="#" class="nav-item disabled" tabindex="1" > Cart({{ session['Shoppingcart']|length }})</a>
 
+          <li class="nav-item">
+            <a href="{{url_for('get_cart')}}" class="nav-item disabled" tabindex="1" > Cart({{ session['Shoppingcart']|length }})</a>
+  
           </li>
   
           <form class="d-flex " style="justify-content: center;" id="searchboss">

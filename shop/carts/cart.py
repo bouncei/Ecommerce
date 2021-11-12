@@ -26,10 +26,12 @@ def add_cart():
         print(quantity,colors)
 
         product = Addproduct.query.filter_by(id=product_id).first()
-        string_product_price = str(product.price)
+        float_product_price = float(product.price)
+
+        print(float_product_price)
         
         if quantity and colors and product_id and request.method == "POST":
-            dicItems = {product_id: {'name': product.name, 'price': string_product_price,
+            dicItems = {product_id: {'name': product.name, 'price': float_product_price,
             'discount': product.discount, 'colors': colors, 'quantity': quantity, 'image': product.image_1}}
 
             # print(dicItems)
@@ -63,10 +65,26 @@ def add_cart():
 
 @app.route('/carts')
 def get_cart():
-    print(session['Shoppingcart'].items())
 
-    products = Addproduct.query.all()
+    # products = Addproduct.query.all()
     if 'Shoppingcart' not in session:
         return redirect(request.referrer)
 
-    return render_template('products/carts.html', title = "Carts")
+    subTotal = 0
+    grandTotal = 0
+    
+    for key, item in session["Shoppingcart"].items():
+        
+        print(key[0])
+
+        discount = (item['discount']/100 * float(item['price']))
+        subTotal += float(item['price'] * int(item['quantity']))
+
+        subTotal -= discount
+        grandTotal += subTotal
+
+        tax = ("%0.2f" % (.06 * float(subTotal)))
+        grandTotal = float("%0.2f" % (1.06 * float(subTotal)))
+
+    
+    return render_template('products/carts.html', title = "Carts", tax=tax, grandTotal=grandTotal)
