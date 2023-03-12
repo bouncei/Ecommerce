@@ -8,7 +8,7 @@ import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myshop.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY']= 'jdfbvgsib3e834ejdckhbd'
 app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(basedir, 'static/images')
